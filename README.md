@@ -1,4 +1,4 @@
-# [Punch v1.0.0]
+# [Punch v2.0.0] MySQLi Support (PHP 5.6+)
 
 Punch is a open source tool that helps you in updating data from CSV to MySQL based on specific Search Key.
 

@@ -1,6 +1,7 @@
 <?php
 if(!empty($_POST)){
 	include("fun.inc.php");
+	$dbc = db_connect();
 	$file = fopen(CSV_FILE, 'r');
 	$data = array();
 	while($row = fgetcsv($file)) {
@@ -129,9 +130,9 @@ if(!empty($_POST)){
 								for($p=0;$p<$primarydb_count;$p++){
 									$k = $primarykey[$p];
 									if($cnt < $primarydb_count){
-										$where .=  $primarydb[$p]." LIKE '".$data[$j][$k]."' AND";
+										$where .=  $primarydb[$p]." LIKE '".mysqli_real_escape_string($dbc, $data[$j][$k])."' AND";
 									}else{
-										$where .=  $primarydb[$p]." LIKE '".$data[$j][$k]."'";
+										$where .=  $primarydb[$p]." LIKE '".mysqli_real_escape_string($dbc, $data[$j][$k])."'";
 									}
 									
 									$cnt = $cnt + 1;	
@@ -144,9 +145,9 @@ if(!empty($_POST)){
 									$ds = $columns_db[$d];
 									$dk = $columns[$d];
 									if($cnt < $columns_count){
-										$data_op .= "`".$ds."` = '".$data[$j][$dk]."',";
+										$data_op .= "`".$ds."` = '".mysqli_real_escape_string($dbc, $data[$j][$dk])."',";
 									}else{
-										$data_op .= "`".$ds."` = '".$data[$j][$dk]."'";
+										$data_op .= "`".$ds."` = '".mysqli_real_escape_string($dbc, $data[$j][$dk])."'";
 									}
 									echo "<th>".$data[$j][$dk]."</th>";
 									$cnt = $cnt + 1;
